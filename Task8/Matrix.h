@@ -3,6 +3,8 @@
 #include <string>
 #include <limits.h>
 #include "Exceptions.h"
+#include "Iterator.h"
+#include "Container.h"
 #include <vector>
 
 using namespace std;
