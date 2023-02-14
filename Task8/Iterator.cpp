@@ -1,7 +1,7 @@
 #include "Iterator.h"
 
 template <typename T>
-Iterator<T>::Iterator(T* InPtr) : Ptr(InPtr)
+Iterator<T>::Iterator(PointerType InPtr) : Ptr(InPtr)
 {}
 
 template <typename T>
@@ -12,7 +12,7 @@ Iterator<T>& Iterator<T>::operator++()
 }
 
 template <typename T>
-Iterator<T>& Iterator<T>::operator++(int)
+Iterator<T> Iterator<T>::operator++(int)
 {
     auto Iter = this;
     ++(*this);
@@ -20,19 +20,34 @@ Iterator<T>& Iterator<T>::operator++(int)
 }
 
 template <typename T>
-T& Iterator<T>::operator[](const int Index)
+Iterator<T>& Iterator<T>::operator--()
+{
+    --Ptr;
+    return *this;
+}
+
+template <typename T>
+Iterator<T> Iterator<T>::operator--(int)
+{
+    auto Iter = this;
+    --(*this);
+    return Iter;
+}
+
+template <typename T>
+typename Iterator<T>::ReferenceType Iterator<T>::operator[](const int Index)
 {
     return *(Ptr + Index);
 }
 
 template <typename T>
-T* Iterator<T>::operator->()
+typename Iterator<T>::PointerType Iterator<T>::operator->()
 {
     return Ptr;
 }
 
 template <typename T>
-T& Iterator<T>::operator*()
+typename Iterator<T>::ReferenceType Iterator<T>::operator*()
 {
     return *Ptr;
 }
@@ -50,14 +65,13 @@ bool Iterator<T>::operator!=(const Iterator& OtherIterator)
 }
 
 template <typename T>
-const T& Iterator<T>::First() const
+const typename Iterator<T>::ReferenceType Iterator<T>::First() const
 {
     return Container<T>::Begin();
 }
 
-
 template <typename T>
-const T& Iterator<T>::Next()
+const typename Iterator<T>::ReferenceType Iterator<T>::Next()
 {
     return ++Ptr;
 }

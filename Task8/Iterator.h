@@ -9,22 +9,28 @@ class IIterator : public iterator<input_iterator_tag, T>
     virtual const T& Next() = 0;
 };
 
-template <typename T>
-class Iterator : public IIterator<T>
+template <typename Container>
+class Iterator : public IIterator<Container>
 {
 public:
-    Iterator(T* InPtr);
+    using  ValueType = typename Container::ValueType;
+    using PointerType =  ValueType*;
+    typedef ValueType& ReferenceType;
+    
+    Iterator(PointerType InPtr);
 
     Iterator& operator++();
-    Iterator& operator++(int);
-    T& operator[](const int Index);
-    T* operator->();
-    T& operator*();
+    Iterator operator++(int);
+    Iterator& operator--();
+    Iterator operator--(int);
+    ReferenceType operator[](const int Index);
+    PointerType operator->();
+    ReferenceType operator*();
     bool operator==(const Iterator& OtherIterator);
     bool operator!=(const Iterator& OtherIterator);
 
-    virtual const T& First() const override;
-    virtual const T& Next() override;
+    virtual const ReferenceType First() const override;
+    virtual const ReferenceType Next() override;
 private:
-    T* Ptr;
+    PointerType Ptr;
 };
