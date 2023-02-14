@@ -1,6 +1,9 @@
 #pragma once
 #include <iterator>
-#include "Matrix.h"
+
+using namespace std;
+template<typename T>
+class Container;
 
 template<typename T>
 class IIterator : public iterator<input_iterator_tag, T>
@@ -9,13 +12,13 @@ class IIterator : public iterator<input_iterator_tag, T>
     virtual const T& Next() = 0;
 };
 
-template <typename Container>
-class Iterator : public IIterator<Container>
+template <typename T>
+class Iterator : public IIterator<T>
 {
 public:
-    using  ValueType = typename Container::ValueType;
+    using  ValueType = T;
     using PointerType =  ValueType*;
-    typedef ValueType& ReferenceType;
+    using ReferenceType =  ValueType&;
     
     Iterator(PointerType InPtr);
 

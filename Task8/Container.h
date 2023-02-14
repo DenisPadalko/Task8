@@ -1,6 +1,9 @@
 #pragma once
-#include "Matrix.h"
+#include <vector>
 #include "Iterator.h"
+#include "Loader.h"
+#include "Sorter.h"
+#include "Exceptions.h"
 
 template <typename T>
 class Container
@@ -14,12 +17,12 @@ public:
     void QuickSort();
     void UsualSort();
 
-    Iterator<T> Begin();
-    Iterator<T> End();
-    Iterator<const T> Begin() const;
-    Iterator<const T> End() const;
+    Iterator<T>& Begin();
+    Iterator<T>& End();
+    Iterator<const T>& Begin() const;
+    Iterator<const T>& End() const;
 
-    int operator[](const int Index);
+    const T& operator[](const int Index);
     
     int GetSize();
 private:

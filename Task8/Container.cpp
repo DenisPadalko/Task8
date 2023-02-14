@@ -1,6 +1,5 @@
 #include "Container.h"
-#include "Loader.h"
-#include "Sorter.h"
+#include "Sorter.cpp"
 
 template <typename T>
 Container<T>::Container()
@@ -10,16 +9,19 @@ Container<T>::Container()
 template <typename T>
 Container<T>::Container(initializer_list<T> Data)
 {
-    VectorOfData = Data;
+    for(auto& i : Data)
+    {
+        VectorOfData.push_back(i);
+    }
 }
 
 template <typename T>
 void Container<T>::LoadFromFile()
 {
-    FileLoader Loader;
     vector<string> DataFromFile;
     try
     {
+        FileLoader Loader;
         DataFromFile = Loader.Load();
     }
     catch (const CannotOpenTheFileException& Ex)
@@ -28,7 +30,8 @@ void Container<T>::LoadFromFile()
     }
     for(auto& i : DataFromFile)
     {
-        VectorOfData.push_back(i);
+        T* SomeObject = new T(i.c_str());
+        VectorOfData.push_back(*SomeObject);
     }
 }
 
@@ -39,7 +42,8 @@ void Container<T>::LoadFromConsole()
     vector<string> DataFromConsole = Loader.Load();
     for(auto& i : DataFromConsole)
     {
-        VectorOfData.push_back(DataFromConsole);
+        T* SomeObject = new T(i.c_str());
+        VectorOfData.push_back(*SomeObject);
     }
 }
 
@@ -58,31 +62,31 @@ void Container<T>::UsualSort()
 }
 
 template <typename T>
-Iterator<T> Container<T>::Begin()
+Iterator<T>& Container<T>::Begin()
 {
-    return CustomIterator(VectorOfData.begin());
+    return Iterator<T>(VectorOfData.begin());
 }
 
 template <typename T>
-Iterator<T> Container<T>::End()
+Iterator<T>& Container<T>::End()
 {
-    return CustomIterator(VectorOfData.begin() + VectorOfData.size());
+    return Iterator<T>(VectorOfData.begin() + VectorOfData.size());
 }
 
 template <typename T>
-Iterator<const T> Container<T>::Begin() const
+Iterator<const T>& Container<T>::Begin() const
 {
-    return ConstCustomIterator(VectorOfData.begin());
+    return Iterator<const T>(VectorOfData.begin());
 }
 
 template <typename T>
-Iterator<const T> Container<T>::End() const
+Iterator<const T>& Container<T>::End() const
 {
-    return ConstCustomIterator(VectorOfData.begin() + VectorOfData.size());
+    return Iterator<const T>(VectorOfData.begin() + VectorOfData.size());
 }
 
 template <typename T>
-int Container<T>::operator[](const int Index)
+const T& Container<T>::operator[](const int Index)
 {
     return VectorOfData[Index];
 }

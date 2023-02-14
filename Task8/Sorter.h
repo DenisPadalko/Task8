@@ -1,6 +1,8 @@
 #pragma once
-#include "Matrix.h"
 #include <functional>
+#include <vector>
+
+using namespace std;
 
 template <typename T>
 class Sorter
@@ -16,11 +18,11 @@ class QuickSorter : public Sorter<T>
 {
 public:
     virtual void Sort(vector<T>& DataToSort) const override;
-    virtual void SortWithPredicate(vector<T>& DataToSort, const Sorter<T>::PredicateType& Predicate) const override;
+    virtual void SortWithPredicate(vector<T>& DataToSort, const typename Sorter<T>::PredicateType& Predicate) const override;
 private:
     void Sort_Internal(vector<T>& DataToSort, const int Start, const int End) const;
     void SortWithPredicate_Internal(vector<T>& DataToSort, const int Start, const int End,
-        const Sorter<T>::PredicateType& Predicate) const;
+        const typename Sorter<T>::PredicateType& Predicate) const;
     static int Partition(vector<T>& DataToSort, const int Start, const int End);
     static int PartitionWithPredicate(vector<T>& DataToSort, const int Start, const int End,
         const typename Sorter<T>::PredicateType& Predicate);

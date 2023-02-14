@@ -1,8 +1,10 @@
 #include "Matrix.h"
+#include "Container.h"
+#include "Container.cpp"
 
 int main(int argc, char* argv[])
 {
-    Container<Matrix> SomeDataContainer{};
+    Container<Matrix> SomeDataContainer;
     SomeDataContainer.LoadFromFile();
     SomeDataContainer.LoadFromConsole();
     SomeDataContainer.QuickSort();
