@@ -58,6 +58,8 @@ public:
 	friend const bool operator==(const Matrix& Left, const Matrix& Right);
 	friend const bool operator!=(const Matrix& Left, const Matrix& Right);
 
+	friend ostream& operator<<(ostream& out, const Matrix& M);
+
 	void MatrixTransponation();
 	void CreateNullMatrix(const size_t Rows, const size_t Columns);
 

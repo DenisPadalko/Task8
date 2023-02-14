@@ -13,22 +13,18 @@ template <typename T>
 class Iterator : public IIterator<T>
 {
 public:
-    using ValueType = typename T::ValueType;
-    using PointerType = ValueType*;
-    using ReferenceType = ValueType&;
-    
-    Iterator(PointerType InPtr);
+    Iterator(T* InPtr);
 
     Iterator& operator++();
     Iterator& operator++(int);
-    ReferenceType operator[](const int Index);
-    PointerType operator->();
-    ReferenceType operator*();
+    T& operator[](const int Index);
+    T* operator->();
+    T& operator*();
     bool operator==(const Iterator& OtherIterator);
     bool operator!=(const Iterator& OtherIterator);
 
     virtual const T& First() const override;
     virtual const T& Next() override;
 private:
-    PointerType Ptr;
+    T* Ptr;
 };

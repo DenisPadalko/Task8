@@ -596,6 +596,20 @@ const bool operator!=(const Matrix& Left, const Matrix& Right)
 	return !(Left == Right);
 };
 
+ostream& operator<<(ostream& out, const Matrix& M)
+{
+	for(size_t i = 0; i < M.Rows; ++i)
+	{
+		for(size_t j = 0; j < M.Columns; ++j)
+		{
+			out << M.MatrixElements[i][j] << " ";
+		}
+		out << endl;
+	}
+	return out;
+}
+
+
 const float Matrix::CalculateSumOfElementsInDiagonals() const
 {
 	float Result = 0;

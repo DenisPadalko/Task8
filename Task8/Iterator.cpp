@@ -1,7 +1,7 @@
 #include "Iterator.h"
 
 template <typename T>
-Iterator<T>::Iterator(PointerType InPtr) : Ptr(InPtr)
+Iterator<T>::Iterator(T* InPtr) : Ptr(InPtr)
 {}
 
 template <typename T>
@@ -20,19 +20,19 @@ Iterator<T>& Iterator<T>::operator++(int)
 }
 
 template <typename T>
-typename Iterator<T>::ReferenceType Iterator<T>::operator[](const int Index)
+T& Iterator<T>::operator[](const int Index)
 {
     return *(Ptr + Index);
 }
 
 template <typename T>
-typename Iterator<T>::PointerType Iterator<T>::operator->()
+T* Iterator<T>::operator->()
 {
     return Ptr;
 }
 
 template <typename T>
-typename Iterator<T>::ReferenceType Iterator<T>::operator*()
+T& Iterator<T>::operator*()
 {
     return *Ptr;
 }

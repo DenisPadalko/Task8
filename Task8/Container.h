@@ -1,13 +1,12 @@
 #pragma once
 #include "Matrix.h"
+#include "Iterator.h"
 
 template <typename T>
 class Container
 {
 public:
-    using ValueType = T;
-    using CustomIterator = Iterator<T>;
-
+    Container();
     Container(initializer_list<T> Data);
 
     void LoadFromFile();
@@ -15,8 +14,14 @@ public:
     void QuickSort();
     void UsualSort();
 
-    CustomIterator Begin();
-    CustomIterator End();
+    Iterator<T> Begin();
+    Iterator<T> End();
+    Iterator<const T> Begin() const;
+    Iterator<const T> End() const;
+
+    int operator[](const int Index);
+    
+    int GetSize();
 private:
     vector<T> VectorOfData;
 };
