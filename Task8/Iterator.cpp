@@ -48,3 +48,16 @@ bool Iterator<T>::operator!=(const Iterator& OtherIterator)
 {
     return !(*this == OtherIterator);
 }
+
+template <typename T>
+const T& Iterator<T>::First() const
+{
+    return Container<T>::Begin();
+}
+
+
+template <typename T>
+const T& Iterator<T>::Next()
+{
+    return ++Ptr;
+}

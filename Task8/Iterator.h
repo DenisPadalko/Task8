@@ -2,8 +2,15 @@
 #include <iterator>
 #include "Matrix.h"
 
+template<typename T>
+class IIterator : public iterator<input_iterator_tag, T>
+{
+    virtual const T& First() const = 0;
+    virtual const T& Next() = 0;
+};
+
 template <typename T>
-class Iterator
+class Iterator : public IIterator<T>
 {
 public:
     using ValueType = typename T::ValueType;
@@ -19,9 +26,9 @@ public:
     ReferenceType operator*();
     bool operator==(const Iterator& OtherIterator);
     bool operator!=(const Iterator& OtherIterator);
-    
-    virtual const T& First() = 0;
-    virtual const T& Next() = 0;
+
+    virtual const T& First() const override;
+    virtual const T& Next() override;
 private:
     PointerType Ptr;
 };
