@@ -1,21 +1,18 @@
 #pragma once
 #include <vector>
 #include "Iterator.h"
-#include "Loader.h"
-#include "Sorter.h"
-#include "Exceptions.h"
 
 template <typename T>
 class Container
 {
 public:
     Container();
-    Container(initializer_list<T> Data);
+    Container(vector<T> Data);
 
     void LoadFromFile();
     void LoadFromConsole();
-    void QuickSort();
-    void UsualSort();
+    const vector<T>& GetQuickSort();
+    const vector<T>& GetUsualSort();
 
     Iterator<T>& Begin();
     Iterator<T>& End();

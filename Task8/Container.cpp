@@ -1,5 +1,9 @@
 #include "Container.h"
 #include "Sorter.cpp"
+#include "Loader.h"
+#include "Exceptions.h"
+
+using namespace std;
 
 template <typename T>
 Container<T>::Container()
@@ -7,9 +11,9 @@ Container<T>::Container()
 
 
 template <typename T>
-Container<T>::Container(initializer_list<T> Data)
+Container<T>::Container(vector<T> Data)
 {
-    for(auto& i : Data)
+    for(T& i : Data)
     {
         VectorOfData.push_back(i);
     }
@@ -28,10 +32,9 @@ void Container<T>::LoadFromFile()
     {
         cout << Ex.GetMessage() << endl;
     }
-    for(auto& i : DataFromFile)
+    for(string& i : DataFromFile)
     {
-        T* SomeObject = new T(i.c_str());
-        VectorOfData.push_back(*SomeObject);
+        VectorOfData.emplace_back(i.c_str());
     }
 }
 
@@ -40,7 +43,7 @@ void Container<T>::LoadFromConsole()
 {
     ConsoleLoader Loader;
     vector<string> DataFromConsole = Loader.Load();
-    for(auto& i : DataFromConsole)
+    for(string& i : DataFromConsole)
     {
         T* SomeObject = new T(i.c_str());
         VectorOfData.push_back(*SomeObject);
@@ -48,17 +51,19 @@ void Container<T>::LoadFromConsole()
 }
 
 template <typename T>
-void Container<T>::QuickSort()
+const vector<T>& Container<T>::GetQuickSort()
 {
     QuickSorter<T> Sorter;
     Sorter.Sort(VectorOfData);
+    return VectorOfData;
 }
 
 template <typename T>
-void Container<T>::UsualSort()
+const vector<T>& Container<T>::GetUsualSort()
 {
     UsualSorter<T> Sorter;
     Sorter.Sort(VectorOfData);
+    return VectorOfData;
 }
 
 template <typename T>

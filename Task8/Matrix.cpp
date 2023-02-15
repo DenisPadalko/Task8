@@ -1,4 +1,5 @@
 #include "Matrix.h"
+#include "Exceptions.h"
 
 Matrix::Matrix() : Columns(3), Rows(3)
 {

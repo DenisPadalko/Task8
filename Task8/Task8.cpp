@@ -7,10 +7,10 @@ int main(int argc, char* argv[])
     Container<Matrix> SomeDataContainer;
     SomeDataContainer.LoadFromFile();
     SomeDataContainer.LoadFromConsole();
-    SomeDataContainer.QuickSort();
-    for(int i = 0; i < SomeDataContainer.GetSize(); ++i)
+    Container<Matrix> AnotherContainer(SomeDataContainer.GetQuickSort());
+    for(int i = 0; i < AnotherContainer.GetSize(); ++i)
     {
-        cout << SomeDataContainer[i] << endl;
+        cout << AnotherContainer[i] << endl;
     }
     return 0;
 }

@@ -2,7 +2,6 @@
 #include <iostream>
 #include <string>
 #include <limits.h>
-#include "Exceptions.h"
 
 using namespace std;
 class Matrix
